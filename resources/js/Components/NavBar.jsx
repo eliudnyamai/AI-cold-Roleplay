@@ -19,7 +19,7 @@ export default function NavBar({ user }) {
         </a>
         <button
           onClick={toggleMenu}
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-black rounded-lg md:hidden hover:bg-black focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-dropdown"
           aria-expanded={isMenuOpen ? "true" : "false"}
         >
@@ -46,7 +46,7 @@ export default function NavBar({ user }) {
           } w-full md:block md:w-auto`}
           id="navbar-dropdown"
         >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-black md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-black md:dark:bg-black dark:border-black">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-black md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-black md:dark:bg-black dark:border-black">
           
             {user ? (
               <>
@@ -77,7 +77,7 @@ export default function NavBar({ user }) {
                         <span className="rounded-md">
                           <button
                             type="button"
-                            className="inline-flex w-full items-center  border border-transparent  leading-4 rounded-md text-gray-500 dark:text-white bg-white dark:bg-black hover:text-green-700 dark:hover:text-green-700 focus:outline-none transition ease-in-out duration-150"
+                            className="inline-flex w-full items-center  border border-transparent  leading-4 rounded-md text-white bg-black hover:text-green-700 dark:hover:text-green-700 focus:outline-none transition ease-in-out duration-150"
                           >
                             {user.name}
 

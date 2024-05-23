@@ -2,7 +2,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
 export default function Index({ auth, success, plays }) {
-    console.table(plays);
     const [showMessage, setShowMessage] = useState(true);
     const closeMessage = () => {
         setShowMessage(false);
@@ -46,11 +45,11 @@ export default function Index({ auth, success, plays }) {
                 >
                 Clear
                 </Link>
-            <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div className="p-6 text-gray-900 dark:text-gray-100">
+            <div className="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="p-6 text-white dark:text-gray-100">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table className="w-full text-sm text-left rtl:text-right text-white">
+                    <thead className="text-xs text-white uppercase bg-gray-700 ">
                         <tr>
                         <th className="px-3 py-2">ID</th>
                         <th className="px-3 py-2">Seller Profile</th>
@@ -84,7 +83,7 @@ export default function Index({ auth, success, plays }) {
                             <div className="flex">
                                 <button
                                 onClick={(e) => deletePlay(play)}
-                                className="bg-red-500 w-1/2 hover:bg-red-700 text-white font-bold p-2 rounded"
+                                className="bg-red-500  hover:bg-red-700 text-white font-bold p-2 rounded"
                                 >
                                 Delete
                                 </button>

@@ -30,9 +30,9 @@ export default function Login({ status, canResetPassword }) {
         <GuestLayout>
             <Head title="Log in" />
         <div className="container h-screen mx-auto">
-            <div className="flex h-screen items-center">
+            <div className="flex flex-col  md:flex-row h-screen items-center">
                 {/* First div */}
-                <div className="w-1/2 p-4">
+                <div className="w-full md:w-1/2 p-4">
                 {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
                     <form onSubmit={submit}>
@@ -71,14 +71,14 @@ export default function Login({ status, canResetPassword }) {
                                     checked={data.remember}
                                     onChange={(e) => setData('remember', e.target.checked)}
                                 />
-                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                                <span className="ms-2 text-sm text-white">Remember me</span>
                             </label>
                         </div>
                         <div className="flex items-center justify-end mt-4">
                             {canResetPassword && (
                                 <Link
                                     href={route('password.request')}
-                                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                    className="underline text-sm text-white hover:text-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                 >
                                     Forgot your password?
                                 </Link>
@@ -91,7 +91,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
                 
                 {/* Second div */}
-                <div className="w-1/2 ">
+                <div className="w-full md:w-1/2 ">
                 <img src={`${window.location.origin}/storage/images/ai_trainer2.jpeg`} alt="Reviewer" className=" w-full h-full object-cover" />
                 </div>
             </div>

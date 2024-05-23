@@ -12,8 +12,17 @@ class AssistantResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+    public static $wrap = false;
+
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'gender' => $this->gender,
+            'id'=>$this->id,
+            'name' => $this->name,
+            'seller_desc' => $this->seller_desc,
+            'openAI_id' => $this->openAI_id,
+            'image_url' => $this->image_url,
+        ];    
     }
 }

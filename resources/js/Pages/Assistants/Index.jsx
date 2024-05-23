@@ -2,7 +2,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
 import { useState } from "react";
 export default function Index({ auth, success, AI_sellers }) {
-    console.log(auth);
     const [showMessage, setShowMessage] = useState(true);
     const closeMessage = () => {
         setShowMessage(false);
@@ -48,13 +47,13 @@ export default function Index({ auth, success, AI_sellers }) {
                 Create AI seller
             </Link>
             </div>
-            <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div className="p-6 text-gray-900 dark:text-gray-100">
+            <div className="bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
+                <div className="sm:p-2 p-6 text-gray-100">
                 
                 <div className="overflow-x-auto">
                     
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table className="w-full text-sm text-left rtl:text-right  text-white ">
+                    <thead className="text-xs text-white uppercase bg-gray-700 ">
                         <tr>
                         <th className="px-3 py-2">ID</th>
                         <th className="px-3 py-2">Name</th>
@@ -65,7 +64,7 @@ export default function Index({ auth, success, AI_sellers }) {
                     <tbody className="">
                         {AI_sellers.map((AI_seller, index) => (
                         <tr
-                            className={`dark:bg-${
+                            className={`bg-${
                             index % 2 === 0 ? "gray-900" : "gray-800"
                             } `}
                             key={AI_seller.id}

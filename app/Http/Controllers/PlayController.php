@@ -104,6 +104,34 @@ class PlayController extends Controller
         session()->forget('thread_id');
         return redirect()->route('plays.index');
     }
+    public function win(Request $request)
+    {
+        $thread_id = session('thread_id');
+            $seller = Assistant::find($request->input('seller_id'));
+            $play = Play::where('thread_id', $thread_id)->first();
+            if ($play) {
+                $play->status = "success";
+                $play->save();
+            }
+            $response = [
+                'AI_seller' => $seller,
+            ];
+            return response()->json($response);
+    }
+    public function fail(Request $request)
+    {
+        $thread_id = session('thread_id');
+        $seller = Assistant::find($request->input('seller_id'));
+        $play = Play::where('thread_id', $thread_id)->first();
+        if ($play) {
+            $play->status = "failed";
+            $play->save();
+        }
+        $response = [
+            'AI_seller' => $seller,
+        ];
+        return response()->json($response);
+    }
     public function deleteAllUserPlays()
     {
         $user = Auth::user();
@@ -133,36 +161,12 @@ class PlayController extends Controller
         $this->addMessage($thread_id, $user_response);
         $threadRun = $this->RunThread($thread_id, $assistant_id);
         $answer = $this->loadAnswer($threadRun);
-        if ($answer == "I AM HAPPY TO CONTINUE") {
-            $thread_id = session('thread_id');
-            $play = Play::where('thread_id', $thread_id)->first();
-            if ($play) {
-                $play->status = "success";
-                $play->save();
-            }
-            session()->forget('thread_id');
-            return redirect()->route('plays.index');
-        }
-        if ($answer == "NOT INTERESTED") { //you lost
-            $thread_id = session('thread_id');
-            $play = Play::where('thread_id', $thread_id)->first();
-            if ($play) {
-                $play->status = "failed";
-                $play->save();
-            }
-            session()->forget('thread_id');
-            return redirect()->route('plays.index');
-        }
+        
         $response = [
             'AI_seller' => $seller,
             'text' => $answer
         ];
-
-        return response()->json($response);
-        // return redirect('/continue')
-        // ->with('text', $answer)
-        // ->with('AI_seller', $seller);    
-
+        return response()->json($response);    
     }
     private function createThread(): ThreadResponse
     {
@@ -170,21 +174,34 @@ class PlayController extends Controller
     }
     private function addMessage($thread_id, $user_response)
     {
-        return OpenAI::threads()->messages()->create($thread_id, [
-            'role' => 'user',
-            'content' => $user_response,
-        ]);
+        try {
+            return OpenAI::threads()->messages()->create($thread_id, [
+                'role' => 'user',
+                'content' => $user_response,
+            ]);
+        } catch (\Exception $e) {
+            error_log("Error adding message: " . $e->getMessage());
+            throw new \RuntimeException("Failed to add message to the thread", 0, $e);
+        }
     }
+    
     private function RunThread($thread_id, $assistant_id): ThreadRunResponse
     {
         set_time_limit(0);
-        return OpenAI::threadRuns()->create(
-            $thread_id,
-            [
-                'assistant_id' => $assistant_id,
-            ]
-        );
+        
+        try {
+            return OpenAI::threadRuns()->create(
+                $thread_id,
+                [
+                    'assistant_id' => $assistant_id,
+                ]
+            );
+        } catch (\Exception $e) {
+            error_log("Error running thread: " . $e->getMessage());
+            throw new \RuntimeException("Failed to run the thread", 0, $e);
+        }
     }
+    
     private function loadAnswer(ThreadRunResponse $threadRun)
     {
         set_time_limit(0);

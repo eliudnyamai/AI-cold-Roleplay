@@ -29,13 +29,13 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
         <div className="container h-screen mx-auto">
-            <div className="flex h-screen items-center">
+            <div className="flex flex-col md:flex-row h-screen items-center">
                 {/* First div */}
-                <div className="w-1/2 p-4">
+                <div className="w-full md:w-1/2 p-2 md:p-4">
                 {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-                <form onSubmit={submit}>
+                <form className='' onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel className='twxt-white' htmlFor="name" value="Name" />
 
                     <TextInput
                         id="name"
@@ -105,7 +105,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        className="underline text-sm text-white hover:text-gray-500 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                     >
                         Already registered?
                     </Link>
@@ -120,7 +120,7 @@ export default function Register() {
                 </div>
                 
                 {/* Second div */}
-                <div className="w-1/2 ">
+                <div className="w-full md:w-1/2 ">
                 <img src={`${window.location.origin}/storage/images/ai_trainer2.jpeg`} alt="Reviewer" className=" w-full h-full object-cover" />
                 </div>
             </div>

@@ -32,6 +32,8 @@ Route::post('/audio', [ChatController::class, 'audio']);
 
 
 Route::middleware('auth')->group(function () {
+    Route::post('/win', [PlayController::class, 'win']);
+    Route::post('/fail', [PlayController::class, 'fail']);
     Route::post('/play', [PlayController::class, 'play']);
     Route::get('/quit', [PlayController::class, 'quitPlay']);
     Route::get('/continue', [PlayController::class, 'continuePlay']);

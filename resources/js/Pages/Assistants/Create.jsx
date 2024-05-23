@@ -29,7 +29,7 @@ export default function Create({ success, auth }) {
         <AuthenticatedLayout user={auth.user}>
         <Head title="Create Seller" />
         <div className="container h-screen mx-auto">
-            <div className="flex h-screen items-center">
+            <div className="flex h-screen md:items-center">
             <div className="w-full p-2">
             {success && (
             <div className="bg-green-500 text-center text-white relative">
@@ -113,7 +113,7 @@ export default function Create({ success, auth }) {
                     type="file"
                     id="image"
                     name="image"
-                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    className="mt-1 focus:ring-indigo-500 text-white focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     onChange={(e) =>
                         setData({ ...data, image: e.target.files[0] })
                     }

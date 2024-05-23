@@ -11,7 +11,6 @@ class ChatController extends Controller
 {
     public ?string $error = null;
     public function test(Request $request){
-        // $threadRun = $this->createAndRunThread("HELLO");
         $this->addMessage();
         $threadRun=$this->RunThread();
         $answer = $this->loadAnswer($threadRun);

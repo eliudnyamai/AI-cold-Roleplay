@@ -24,7 +24,7 @@ export default function Create({ success, auth, AI_seller }) {
                 {success}
             </div>
             )}
-            <div className="flex h-screen items-center">
+            <div className="flex  items-center">
             <div className="w-full border border-white p-4">
                 <div className="text-white text-center mb-4">
                 AI Seller Profile: {AI_seller.name}
