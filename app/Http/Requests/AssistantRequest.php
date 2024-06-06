@@ -26,8 +26,6 @@ class AssistantRequest extends FormRequest
             'seller_desc' =>['required', 'string'],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'gender' => ['required', 'string', 'max:255'],
-
-
         ];
     }
 }

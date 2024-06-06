@@ -48,42 +48,6 @@ class PlayController extends Controller
             'thread_id' => $thread_id
         ]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $play = Play::findOrFail($id);
@@ -107,16 +71,16 @@ class PlayController extends Controller
     public function win(Request $request)
     {
         $thread_id = session('thread_id');
-            $seller = Assistant::find($request->input('seller_id'));
-            $play = Play::where('thread_id', $thread_id)->first();
-            if ($play) {
-                $play->status = "success";
-                $play->save();
-            }
-            $response = [
-                'AI_seller' => $seller,
-            ];
-            return response()->json($response);
+        $seller = Assistant::find($request->input('seller_id'));
+        $play = Play::where('thread_id', $thread_id)->first();
+        if ($play) {
+            $play->status = "success";
+            $play->save();
+        }
+        $response = [
+            'AI_seller' => $seller,
+        ];
+        return response()->json($response);
     }
     public function fail(Request $request)
     {
@@ -161,12 +125,12 @@ class PlayController extends Controller
         $this->addMessage($thread_id, $user_response);
         $threadRun = $this->RunThread($thread_id, $assistant_id);
         $answer = $this->loadAnswer($threadRun);
-        
+
         $response = [
             'AI_seller' => $seller,
             'text' => $answer
         ];
-        return response()->json($response);    
+        return response()->json($response);
     }
     private function createThread(): ThreadResponse
     {
@@ -184,11 +148,11 @@ class PlayController extends Controller
             throw new \RuntimeException("Failed to add message to the thread", 0, $e);
         }
     }
-    
+
     private function RunThread($thread_id, $assistant_id): ThreadRunResponse
     {
         set_time_limit(0);
-        
+
         try {
             return OpenAI::threadRuns()->create(
                 $thread_id,
@@ -201,7 +165,7 @@ class PlayController extends Controller
             throw new \RuntimeException("Failed to run the thread", 0, $e);
         }
     }
-    
+
     private function loadAnswer(ThreadRunResponse $threadRun)
     {
         set_time_limit(0);
